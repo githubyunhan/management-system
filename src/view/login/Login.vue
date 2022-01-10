@@ -27,14 +27,14 @@
                             style="width: 200px"/>
                 </FormItem>
                 <FormItem prop="loginPassword">
-                  账号：<Input v-model="loginForm.loginPassword" prefix="ios-compass" type="password"
+                  密码：<Input v-model="loginForm.loginPassword" prefix="ios-compass" type="password"
                             :placeholder="$t('login.loginPassword')"
                             style="width: 200px"></Input>
                 </FormItem>
               </div>
             </Form>
             <div style="margin-top: 20px">
-              <button type="primary" @click="loginSystem" :long="true">登录</button>
+              <Button type="primary" @click="loginSystem" :long="true">登录</Button>
             </div>
           </Card>
         </div>
@@ -75,6 +75,9 @@
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
             console.log('实现用户登录')
+            this.$router.push({
+              name: 'main'
+            })
           }
         })
       },
