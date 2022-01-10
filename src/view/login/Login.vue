@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import Language from '../../components/Language'
+  import Language from '../../components/language'
 
   export default {
     name: "Login",
