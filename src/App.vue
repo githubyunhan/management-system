@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <button type="primary">{{$t('login.loginAccount')}}</button>
     <img src="./assets/logo.png">
     <router-view/>
   </div>
