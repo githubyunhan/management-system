@@ -45,6 +45,7 @@
 
 <script>
   import Language from '../../components/language'
+  import { login } from '../../network/api/sys/user/user.api'
 
   export default {
     name: "Login",
@@ -74,9 +75,14 @@
       loginSystem() {
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
-            console.log('实现用户登录')
-            this.$router.push({
-              name: 'main'
+            login(this.loginForm).then(res=>{
+              if(res.code == 200){
+                this.$router.push({
+                  name: 'main'
+                })
+              }else{
+                this.$Message.error('账号密码错误！');
+              }
             })
           }
         })
@@ -89,6 +95,13 @@
     mounted() {
     }
   }
+
+
+
+
+
+
+
 </script>
 
 <style scoped>
