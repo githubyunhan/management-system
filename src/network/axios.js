@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import {Message} from 'iview';
+import config from '../config/run.config';
 
 class httpRequest {
 
@@ -49,8 +50,8 @@ class httpRequest {
   // 创建实例
   create() {
     let conf = {
-      // 远程请求的服务的地址
-      baseURL: "http://127.0.0.1:8888",
+      // 远程请求的服务的地址，动态获取
+      baseURL: config.runConfig.baseUrl,
       // 超时时间
       timeout: 5000,
       headers: {
@@ -59,7 +60,7 @@ class httpRequest {
         // 数据的提交方式为form的方式提交，若需要使用json的模式提交则将Content-Type值改为如下
         // application/json; charset=utf-8
         // application/x-www-form-urlencoded; charset=utf-8
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
         'X-URL-PATH': location.pathname
       }
     };

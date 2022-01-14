@@ -75,6 +75,7 @@
       loginSystem() {
         this.$refs['loginForm'].validate((valid) => {
           if (valid) {
+            console.log(this.loginForm);
             login(this.loginForm).then(res=>{
               if(res.code == 200){
                 this.$router.push({
