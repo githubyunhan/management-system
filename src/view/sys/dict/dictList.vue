@@ -49,6 +49,8 @@
 </template>
 
 <script>
+  import { deleteDict, updateDict, queryDictList} from '../../../network/api/sys/dictionary/dictionary.api'
+
   export default {
     name: "dictList",
     data() {
@@ -99,10 +101,31 @@
     },
     methods: {
       addDict() {
-        console.log('新增字典')
+        console.log('新增字典');/*后台展示信息*/
       },
       handleSearch(){
-        console.log('查询搜索框')
+        console.log('查询搜索框');
+        let current = this.current;
+        let pageSize = this.pageSize;
+        let search = this.search;
+        let orderKey = this.key;
+        let orderByValue = this.order;
+        const _this = this;
+        queryDictList({
+          current,
+          pageSize,
+          search,
+          orderKey,
+          orderByValue
+        }).then(res => {
+          if (res.code == 200) {
+            this.$Message.success('查询数据字典成功');/*通过吐司（toast）跳出弹框展示信息*/
+            _this.total = res.obj.total;
+            _this.dictData = res.obj.rows
+          } else {
+            this.$Message.error(  '查询数据字典失败,' + res.message)
+          }
+        });
       },
       onSortChange(sort){
         //console.log(sort)
@@ -116,13 +139,50 @@
         this.handleSearch();
       },
       handleUpdate(index){
-        console.log('点击了确定')
+        console.log('点击了确定');
+        updateDict({
+          id: this.editId,
+          dictValue: this.editDictValue,
+          dictText: this.editDictText,
+          dictCode: this.editDictCode
+        }).then(res => {
+          if (res.code == 200) {
+            this.$Message.success('更新字典数据成功');
+            this.editIndex = -1;
+            this.handleSearch()/*重新加载数据*/
+          } else {
+            this.$Message.error( '更新字典数失败,' + res.message)
+          }
+        });
       },
       handleEdit(row, index){
-        console.log('点击了编辑')
+        console.log('点击了编辑');
+        this.editDictCode = row.dictCode;
+        this.editDictText = row.dictText;
+        this.editDictValue = row.dictValue;
+        this.editId = row.id;
+        this.editIndex = index
       },
       handleDelete(row, index){
-        console.log('点击了删除')
+        console.log('点击了删除');
+        this.$Modal.confirm({
+          title: '提示',
+          content: '<p>是否删除字典数据？</p>',/*弹出提示框*/
+          onOk: () => {
+            deleteDict({id: row.id}).then(res => {
+              if (res.code == 200) {
+                this.$Message.success('字典数据删除成功');
+                // 删除数据成功同时刷新grid
+                this.handleSearch();
+              } else {
+                this.$Message.warning('字典数据删除失败');
+              }
+            });
+          },
+          onCancel: () => {
+            this.$Message.info('取消删除请求');
+          }
+        });
       },
       changePage(current) {
         this.current = current;
