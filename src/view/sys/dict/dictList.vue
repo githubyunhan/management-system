@@ -41,7 +41,8 @@
         </Table>
       </div>
       <div style="margin-top: 10px;">
-        这是我们的分页组件
+        <Page show-elevator show-sizer show-total :total="total" :current="current"
+              :page-size="pageSize" @on-change="changePage" @on-page-size-change="changePageSize"/>
       </div>
     </Card>
   </div>
@@ -62,7 +63,7 @@
           },
           {
             title: '字典编码',
-            slot: 'dictCode',
+            slot: 'dictCode',/*sole插槽*/
             key: 'dictCode',
             sortable: true
           },
@@ -90,15 +91,29 @@
         editDictCode: '',
         editDictText: '',
         editDictValue: '',
-        tableHeight:200
+        tableHeight:200,
+        total: 0,
+        current: 1,
+        pageSize: 10
       }
     },
     methods: {
       addDict() {
-        console.log('增加字典')
+        console.log('新增字典')
       },
       handleSearch(){
-        console.log('这是一个查询')
+        console.log('查询搜索框')
+      },
+      onSortChange(sort){
+        //console.log(sort)
+        console.log(sort.key+'-'+sort.order)
+        if(sort.order=='normal'){
+          this.order = '';
+        }else{
+          this.key = sort.key;
+          this.order = sort.order;
+        }
+        this.handleSearch();
       },
       handleUpdate(index){
         console.log('点击了确定')
@@ -109,14 +124,12 @@
       handleDelete(row, index){
         console.log('点击了删除')
       },
-      onSortChange(sort){
-        console.log(sort.key+'-'+sort.order)
-        if(sort.order=='normal'){
-          this.order = '';
-        }else{
-          this.key = sort.key;
-          this.order = sort.order;
-        }
+      changePage(current) {
+        this.current = current;
+        this.handleSearch();
+      },
+      changePageSize(pageSize) {// 改变每页记录的条数
+        this.pageSize = pageSize;
         this.handleSearch();
       }
     },
