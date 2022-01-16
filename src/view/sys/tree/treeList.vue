@@ -188,6 +188,30 @@
       },
       handleDelete() {
         console.log('删除菜单')
+        if (this.parentTreeId == 0) {
+          this.$Message.warning('请选择需要删除的菜单节点');
+          return;
+        }
+        this.$Modal.confirm({
+          title: '删除菜单',
+          content: '<p>是否删除当前的菜单节点</p>',
+          onOk: () => {
+            deleteTree({treeId: this.parentTreeId}).then(res => {
+              if (res.code == 200) {
+                this.$Message.success(res.message);
+                this.parentTreeId = 0;
+                this.parentTreeName = '顶层节点';
+                // 删除数据成功同时刷新grid
+                this.initTree();
+              } else {
+                this.$Message.warning(res.message);
+              }
+            });
+          },
+          onCancel: () => {
+            this.$Message.info('取消了删除');
+          }
+        })
       },
       onSelectChange(data) {
         // 如果长度为0说明当前没有任何节点被选中
