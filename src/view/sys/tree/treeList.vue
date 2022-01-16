@@ -69,6 +69,8 @@
         </Col>
       </Row>
     </Card>
+    <addTree v-model="addTreeShow" :parentTreeId="parentTreeId" :parentTreeName="parentTreeName"
+             v-on:reloadTree="initTree"></addTree>
   </div>
 </template>
 
@@ -81,11 +83,18 @@
     deleteTree
   } from "../../../network/api/sys/tree/tree.api"
 
+  import addTree from './addTree'
+
   export default {
     name: "treeList",
+    components: {
+      addTree
+    },
     data() {
       return {
+        addTreeShow: false,
         roleTreeDate: [],
+        hasChildren: false,
         parentTreeName: '顶层节点',
         parentTreeId: 0,
         search: '',
@@ -163,6 +172,7 @@
       },
       handleAdd() {
         console.log('增加菜单')
+        this.addTreeShow = true
       },
       handleUpdate() {
         console.log('修改菜单')
@@ -171,6 +181,20 @@
         console.log('删除菜单')
       },
       onSelectChange(data) {
+        // 如果长度为0说明当前没有任何节点被选中
+        if (data.length == 0) {
+          this.parentTreeId = 0;
+          this.parentTreeName = '顶层节点';
+          this.hasChildren = false;
+        } else {
+          this.parentTreeId = data[0].treeId;
+          this.parentTreeName = data[0].title;
+          if (data[0].children.length == 0) {
+            this.hasChildren = false;
+          } else {
+            this.hasChildren = true;
+          }
+        }
       },
       initTree() {
         const _this = this;
