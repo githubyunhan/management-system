@@ -71,6 +71,19 @@ const routes = [
           code:'system-manage-tree',
           requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
         }
+      },
+      {
+        path: 'roleList',
+        name: 'roleList',
+        component: resolve => {
+          require(['../view/sys/role/roleList.vue'], resolve);
+        },
+        meta: {
+          icon: 'ios-cog',
+          title: '角色管理',
+          code:'system-manage-role',
+          requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
+        }
       }
     ]
   }
