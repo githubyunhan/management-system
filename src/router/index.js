@@ -58,6 +58,19 @@ const routes = [
           code:'system-manage-dict',
           requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
         }
+      },
+      {
+        path: 'treeList',
+        name: 'treeList',
+        component: resolve => {
+          require(['../view/sys/tree/treeList.vue'], resolve);
+        },
+        meta: {
+          icon: 'md-git-network',
+          title: '菜单管理',
+          code:'system-manage-tree',
+          requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
+        }
       }
     ]
   }

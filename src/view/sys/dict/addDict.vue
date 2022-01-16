@@ -65,6 +65,7 @@
     },
     methods: {
       ok() {
+        console.log('点击了确定按钮');
         this.$refs['dictForm'].validate((valid) => {
           if (valid) {
             addDict(this.dictForm).then(res => {
@@ -113,6 +114,7 @@
       },
       show(val) {
         if (val) {
+          console.log('当打开新增的页面的时候的一些操作');
           this.$refs['dictForm'].resetFields();
         } else {// 反之则关闭页面
           this.closeModal(val);
