@@ -45,16 +45,23 @@
               :page-size="pageSize" @on-change="changePage" @on-page-size-change="changePageSize"/>
       </div>
     </Card>
+    <add-dict v-model="addShow" :handleSearch="handleSearch"></add-dict>
   </div>
 </template>
 
 <script>
   import { deleteDict, updateDict, queryDictList} from '../../../network/api/sys/dictionary/dictionary.api'
 
+  import addDict from './addDict'
+
   export default {
     name: "dictList",
+    components: {
+      addDict
+    },
     data() {
       return {
+        addShow: false,
         search: '',
         dictData: [],
         columns: [/*列*/
@@ -102,6 +109,7 @@
     methods: {
       addDict() {
         console.log('新增字典');/*后台展示信息*/
+        this.addShow = true
       },
       handleSearch(){
         console.log('查询搜索框');
