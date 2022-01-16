@@ -71,6 +71,7 @@
     </Card>
     <addTree v-model="addTreeShow" :parentTreeId="parentTreeId" :parentTreeName="parentTreeName"
              v-on:reloadTree="initTree"></addTree>
+    <updateTree v-model="updateTreeShow" :treeId="parentTreeId" v-on:reloadTree="initTree"></updateTree>
   </div>
 </template>
 
@@ -84,15 +85,18 @@
   } from "../../../network/api/sys/tree/tree.api"
 
   import addTree from './addTree'
+  import updateTree from './updateTree'
 
   export default {
     name: "treeList",
     components: {
-      addTree
+      addTree,
+      updateTree
     },
     data() {
       return {
         addTreeShow: false,
+        updateTreeShow: false,
         roleTreeDate: [],
         hasChildren: false,
         parentTreeName: '顶层节点',
@@ -176,6 +180,11 @@
       },
       handleUpdate() {
         console.log('修改菜单')
+        if (this.parentTreeId == 0) {
+          this.$Message.warning('请选择需要修改的菜单节点');
+          return;
+        }
+        this.updateTreeShow = true
       },
       handleDelete() {
         console.log('删除菜单')
