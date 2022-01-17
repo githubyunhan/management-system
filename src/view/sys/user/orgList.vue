@@ -42,6 +42,8 @@
         </Col>
       </Row>
     </Card>
+    <addOrg v-model="addOrgShow" :parentOrgId="parentOrgId" :parentOrgName="parentOrgName"
+            v-on:reloadTree="initTree"></addOrg>
   </div>
 </template>
 
@@ -55,8 +57,13 @@
     deleteUser
   } from "../../../network/api/sys/user/user.api"
 
+  import addOrg from './addOrg'
+
   export default {
     name: "orgList",
+    components: {
+      addOrg
+    },
     data() {
       return {
         search: '',
