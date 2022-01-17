@@ -44,6 +44,7 @@
     </Card>
     <addOrg v-model="addOrgShow" :parentOrgId="parentOrgId" :parentOrgName="parentOrgName"
             v-on:reloadTree="initTree"></addOrg>
+    <updateOrg v-model="updateOrgShow" :orgId="parentOrgId" v-on:reloadTree="initTree"></updateOrg>
   </div>
 </template>
 
@@ -58,11 +59,13 @@
   } from "../../../network/api/sys/user/user.api"
 
   import addOrg from './addOrg'
+  import updateOrg from './updateOrg'
 
   export default {
     name: "orgList",
     components: {
-      addOrg
+      addOrg,
+      updateOrg
     },
     data() {
       return {
