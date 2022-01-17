@@ -42,17 +42,20 @@
       </div>
     </Card>
     <addRole v-model="addShow" v-on:handleSearch="handleSearch"></addRole>
+    <editRole v-model="editShow" :roleId="roleId" v-on:handleSearch="handleSearch"></editRole>
   </div>
 </template>
 
 <script>
   import {queryRoleList, updateRole, deleteRole} from '../../../network/api/sys/role/role.api'
   import addRole from './addRole'
+  import editRole from './editRole'
 
   export default {
     name: "roleList",
     components: {
-      addRole
+      addRole,
+      editRole
     },
     data() {
       return {
