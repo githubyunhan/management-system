@@ -4,7 +4,7 @@
   "obj": [
     {
       "treeId": 1,
-      "treeName": "系统管理",
+      "title": "系统管理",
       "treeCode": "system-manage",
       "treeState": "1",
       "treeType": "1",
@@ -15,7 +15,7 @@
       "children": [
         {
           "treeId": 2,
-          "treeName": "字典管理",
+          "title": "字典管理",
           "treeCode": "system-manage-dict",
           "treeState": "1",
           "treeType": "1",
@@ -26,7 +26,7 @@
           "children": [
             {
               "treeId": 3,
-              "treeName": "增加字典",
+              "title": "增加字典",
               "treeCode": "system-manage-dict-add",
               "treeState": "1",
               "treeType": "2",
@@ -40,7 +40,7 @@
         },
         {
           "treeId": 4,
-          "treeName": "角色管理",
+          "title": "角色管理",
           "treeCode": "system-manage-role",
           "treeState": "1",
           "treeType": "1",
@@ -52,7 +52,7 @@
         },
         {
           "treeId": 13,
-          "treeName": "菜单管理",
+          "title": "菜单管理",
           "treeCode": "system-manage-tree",
           "treeState": "1",
           "treeType": "1",
@@ -64,7 +64,7 @@
         },
         {
           "treeId": 14,
-          "treeName": "用户组织",
+          "title": "用户组织",
           "treeCode": "system-manage-user",
           "treeState": "1",
           "treeType": "1",
@@ -76,7 +76,7 @@
         },
         {
           "treeId": 15,
-          "treeName": "行为日志",
+          "title": "行为日志",
           "treeCode": "system-manage-behavior",
           "treeState": "1",
           "treeType": "1",

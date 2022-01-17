@@ -41,14 +41,19 @@
               :page-size="pageSize" @on-change="changePage" @on-page-size-change="changePageSize"/>
       </div>
     </Card>
+    <addRole v-model="addShow" v-on:handleSearch="handleSearch"></addRole>
   </div>
 </template>
 
 <script>
   import {queryRoleList, updateRole, deleteRole} from '../../../network/api/sys/role/role.api'
+  import addRole from './addRole'
 
   export default {
     name: "roleList",
+    components: {
+      addRole
+    },
     data() {
       return {
         addShow: false,
