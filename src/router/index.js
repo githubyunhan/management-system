@@ -84,6 +84,19 @@ const routes = [
           code:'system-manage-role',
           requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
         }
+      },
+      {
+        path: 'orgList',
+        name: 'orgList',
+        component: resolve => {
+          require(['../view/sys/user/orgList.vue'], resolve);
+        },
+        meta: {
+          icon: 'ios-people',
+          title: '用户组织',
+          code:'system-manage-user',
+          requireAuth: true //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
+        }
       }
     ]
   }
