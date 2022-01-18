@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import App from './App'
-import router from './router'
-/*引入国际化包*/
+import {router} from './router/index'
+// 引入国际化包
 import i18n from './local'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import runConfig from './config/run.config';
 import iviewArea from 'iview-area';
+import store from './store';
 
 Vue.use(iviewArea);
 /**
@@ -49,5 +50,6 @@ new Vue({
   router,
   /*国际化初始化*/
   i18n,
+  store: store,
   render: h => h(App)
 });

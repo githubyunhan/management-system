@@ -112,13 +112,13 @@
               address: this.userForm.address
             }).then(res => {
               if (res.code == 200) {
-                this.$Message.success(res.msg);
+                this.$Message.success(res.message);
                 // 提交表单数据成功则关闭当前的modal框
                 this.closeModal(false);
                 // 同时调用父页面的刷新页面的方法
                 this.$emit('handleSearch');
               } else {
-                this.$Message.error(res.msg);
+                this.$Message.error(res.message);
               }
             })
           } else {
@@ -169,14 +169,14 @@
             if (res.code == 200) {
               this.orgData = res.obj;
             } else {
-              this.$Message.error(res.msg);
+              this.$Message.error(res.message);
             }
           });
           loadAllRole({}).then(res => {
             if (res.code == 200) {
               this.roleDate = res.obj;
             } else {
-              this.$Message.error(res.msg);
+              this.$Message.error(res.message);
             }
           });
         } else {// 反之则关闭页面

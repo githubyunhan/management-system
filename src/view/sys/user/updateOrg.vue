@@ -67,13 +67,13 @@
           if (valid) {
             updateOrg(this.orgForm).then(res => {
               if (res.code == 200) {
-                this.$Message.success(res.msg);
+                this.$Message.success(res.message);
                 // 提交表单数据成功则关闭当前的modal框
                 this.closeModal(false);
                 // 同时调用父页面的刷新页面的方法
                 this.$emit('reloadTree');
               } else {
-                this.$Message.error(res.msg);
+                this.$Message.error(res.message);
               }
             })
           } else {
@@ -131,7 +131,7 @@
             if (res.code == 200) {
               this.orgForm = res.obj;
             } else {
-              this.$Message.error(res.msg);
+              this.$Message.error(res.message);
             }
           });
         } else {// 反之则关闭页面
