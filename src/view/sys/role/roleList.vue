@@ -83,7 +83,7 @@
             sortable: true,
             render: (h,params)=>{
               return h('div',
-                this.formatDate(new Date(params.row.crtDate),'yyyy/MM/dd hh:mm:ss')
+                this.formatDate(new Date(params.row.createDate),'yyyy/MM/dd hh:mm:ss')
               )
             }
           },
@@ -194,6 +194,7 @@
       // 初始化完成组件的时候执行以下的逻辑
       this.handleSearch();
       this.tableHeight = window.innerHeight - this.$refs.roleTable.$el.offsetTop - 270
+      /*console.log(this.formatDate(new Date(1558495910000 * 1000), 'yyyy/MM/dd hh:mm:ss'));*/
     }
   }
 </script>

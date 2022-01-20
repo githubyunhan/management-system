@@ -8,6 +8,17 @@
             <img height="50px" width="50px" src="../../assets/logo.png"/>
           </div>
           <div class="layout-nav">
+            <Dropdown @on-click="userAction">
+              <a href="javascript:void(0)" style="color: white">
+                {{this.nickName}}
+              </a>
+              <DropdownMenu slot="list">
+                <DropdownItem name="regPass">修改密码</DropdownItem>
+                <DropdownItem name="loginOut" divided>退出登录</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+          <div class="layout-nav">
             <language @on-lang-change="setLanguage" style="margin-right: 10px" :lang="local"/>
           </div>
           <div class="layout-nav">
@@ -73,26 +84,33 @@
         </layout>
       </Layout>
     </Layout>
+    <changePassword v-model="showChangePassword"></changePassword>
   </div>
 </template>
 
 <script>
   import Language from "../../components/language/Language";
-  import {mapMutations} from 'vuex';
+  import {mapMutations, mapActions} from 'vuex';
+  import changePassword from './changePassword';
 
   export default {
     name: "main",
     components: {
-      Language
+      Language,
+      changePassword
     },
     data() {
       return {
-        local: localStorage.getItem('lang')
+        local: localStorage.getItem('lang'),
+        showChangePassword: false
       }
     },
     methods: {
       ...mapMutations([
         'setBreadCrumb'
+      ]),
+      ...mapActions([
+        'handleLogOut'
       ]),
       /**
        * 顶部跟随着滚动条的变化而滚动
@@ -105,12 +123,27 @@
           document.querySelector('#layout-header-scroll').style.top = '0px';
         }
       },
+      userAction(name) {
+        // 实现退出登录
+        if (name == 'loginOut') {
+          this.handleLogOut();
+          this.turnToView('login');
+          // 实现修改密码
+        } else if (name == 'regPass') {
+          this.showChangePassword = true;
+        }
+      },
       setLanguage(lang) {
         this.local = lang
         localStorage.setItem('lang',lang)
       },
       showBreadcrumbItem(item) {
         return (item.meta && item.meta.title) || item.name
+      },
+      turnToView(name) {
+        this.$router.push({
+          name: name
+        })
       }
     },
     watch: {
@@ -124,6 +157,9 @@
       },
       menuList() {
       return this.$store.getters.menuList;
+      },
+      nickName() {
+        return this.$store.getters.nickName;
       }
     },
     mounted() {
