@@ -45,7 +45,7 @@
 
 <script>
   import Language from '../../components/language'
-  import { login } from '../../network/api/sys/user/user.api'
+  import {mapActions} from 'vuex';
 
   export default {
     name: "Login",
@@ -72,15 +72,26 @@
       }
     },
     methods: {
+      ...mapActions([
+        'handleLogin',
+        'getUserInfo'
+      ]),
       loginSystem() {
         this.$refs['loginForm'].validate((valid) => {
+          // 输出加密结果
           if (valid) {
             //console.log(this.loginForm);
-            login(this.loginForm).then(res=>{
-              console.log(JSON.stringify(res))
-              if(res.code == 200){
-                this.$router.push({
-                  name: 'main'
+            this.handleLogin({
+              loginAccount: this.loginForm.loginAccount,
+              loginPassword: this.loginForm.loginPassword
+            }).then(res => {
+              if (this.token != '' && res.code == 200) {
+                this.getUserInfo().then(res => {
+                  if (res.code = 200) {
+                    this.$router.push({
+                      name: 'main'
+                    })
+                  }
                 })
               }else{
                 this.$Message.error('账号密码错误！');
@@ -97,13 +108,6 @@
     mounted() {
     }
   }
-
-
-
-
-
-
-
 </script>
 
 <style scoped>

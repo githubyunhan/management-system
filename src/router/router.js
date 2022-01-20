@@ -2,17 +2,16 @@ import main from '../view/main/main.vue';
 
 export default [
   {
-    path: '/',
-    redirect: '/login'
-  },
-  {
     path: '/login',
     name: 'login',
     component: resolve => {
       require(['../view/login/login.vue'], resolve);
     },
-    meta:{//元数据
-      title:'登录页面'
+    meta: {
+      icon: 'ios-settings',
+      hideInMenu: true,
+      title: '登陆页',
+      requireAuth: false //表示当前响应的请求是否需要进行登录拦截验证【true：需要；false：不需要】
     }
   },
   {
@@ -94,6 +93,3 @@ export default [
     ]
   }
 ]
-
-
-

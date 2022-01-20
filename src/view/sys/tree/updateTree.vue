@@ -69,7 +69,7 @@
                 // 同时调用父页面的刷新页面的方法
                 this.$emit('reloadTree');
               } else {
-                this.$Message.error(res.msg);
+                this.$Message.error(res.message);
               }
             })
           } else {
@@ -112,7 +112,7 @@
             if (res.code == 200) {
               this.treeForm = res.obj;
             } else {
-              this.$Message.error(res.msg);
+              this.$Message.error(res.message);
             }
           });
         } else {// 反之则关闭页面
